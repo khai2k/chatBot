@@ -1,0 +1,8 @@
+E:\MWG\BANGOC\chatbotadmin\worker\ChatBotWorker\ChatBotWorker\bin\Debug\ChatBotWorker.exe.config
+E:\MWG\BANGOC\chatbotadmin\worker\ChatBotWorker\ChatBotWorker\bin\Debug\ChatBotWorker.exe
+E:\MWG\BANGOC\chatbotadmin\worker\ChatBotWorker\ChatBotWorker\bin\Debug\ChatBotWorker.pdb
+E:\MWG\BANGOC\chatbotadmin\worker\ChatBotWorker\ChatBotWorker\bin\Debug\Newtonsoft.Json.dll
+E:\MWG\BANGOC\chatbotadmin\worker\ChatBotWorker\ChatBotWorker\bin\Debug\Newtonsoft.Json.xml
+E:\MWG\BANGOC\chatbotadmin\worker\ChatBotWorker\ChatBotWorker\obj\Debug\ChatBotWorker.csproj.CopyComplete
+E:\MWG\BANGOC\chatbotadmin\worker\ChatBotWorker\ChatBotWorker\obj\Debug\ChatBotWorker.exe
+E:\MWG\BANGOC\chatbotadmin\worker\ChatBotWorker\ChatBotWorker\obj\Debug\ChatBotWorker.pdb

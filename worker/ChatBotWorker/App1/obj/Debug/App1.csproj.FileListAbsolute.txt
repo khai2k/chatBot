@@ -1,0 +1,5 @@
+E:\MWG\BANGOC\chatbotadmin\worker\ChatBotWorker\App1\bin\Debug\App1.exe.config
+E:\MWG\BANGOC\chatbotadmin\worker\ChatBotWorker\App1\bin\Debug\App1.exe
+E:\MWG\BANGOC\chatbotadmin\worker\ChatBotWorker\App1\bin\Debug\App1.pdb
+E:\MWG\BANGOC\chatbotadmin\worker\ChatBotWorker\App1\obj\Debug\App1.exe
+E:\MWG\BANGOC\chatbotadmin\worker\ChatBotWorker\App1\obj\Debug\App1.pdb
