@@ -102,7 +102,7 @@ namespace ChatBotWorker
             Console.WriteLine("TOKEN: " + token);
             try
             {
-                string Url = @"https://graph.facebook.com/v7.0/" + page + "/conversations?fields=senders,id,can_reply,scoped_thread_key,messages.limit(1){message,from}&limit=20&access_token=" + token;// );
+                string Url = @"https://graph.facebook.com/v7.0/" + page + "/conversations?fields=senders,id,can_reply,scoped_thread_key,messages.limit(1){message,from,created_time}&limit=20&access_token=" + token;// );
 
                 var request = (HttpWebRequest)WebRequest.Create(Url);
                 request.Method = "GET";
@@ -121,54 +121,57 @@ namespace ChatBotWorker
 
                         if (long.Parse(iten.messages.data[0].from.id) != page)
                         {
-                            //var urll = "http://www.thegioididong.com/qtcm/fb/exeUpdateConversation?conversationid=" + iten.id + "&pageid=" + page;
-                            //string xx = wc.DownloadString(urll);
-
-                            // IMSERT CHAT VÀO MONGODB
-
-                            //if (CmtSvc.InsertArrchiveChat(page, iten.id) > 0)
-                            //{
-                            //    Console.WriteLine("NOTIFY: insert chat new customer\n");
-                            //}
-
                             ChatBO document = new ChatBO()
                             {
                                 _id = iten.id,
                                 FbID = iten.id,
                                 CustomerName = iten.senders.data[0].name,
                                 LastMessage = iten.messages.data[0].message,
-                                IsChiem = 0,
-                                IsReply = 0
+                                IsReply = 0,
+                                UpdatedDate = DateTime.Now,
+                                BeginDate = DateTime.Now,
+                                MessageUpdatedDate = iten.messages.data[0].created_time,
+                                CurentUserSupport = 0, // mắc định là BOT
+                                //ListUserSupport
                             };
 
+                            // upsert
+                            //var result = collection.ReplaceOne(x => x._id == document._id, document,
+                            //    new UpdateOptions
+                            //    {
+                            //        IsUpsert = true
+                            //    });
 
-                            var result = collection.ReplaceOne(x => x._id == document._id, document,
-                                new UpdateOptions
-                                {
-                                    IsUpsert = true
-                                });
 
+                            var findData = collection.Find(x => x._id == iten.id).ToList();
+                            if (findData == null || findData.Count == 0)
+                            {
+                                collection.InsertOne(document);
+                            }
+                            else
+                            {
+                                collection.UpdateOne(
+                                   d => d._id == iten.id,
+                                   Builders<ChatBO>.Update
+                                        .Set(d => d.LastMessage, document.LastMessage)
+                                        .Set(d => d.UpdatedDate, DateTime.Now)
+                                        .Set(d => d.MessageUpdatedDate, document.MessageUpdatedDate)
+                                   );
 
-                            //var findData = collection.Find(x => x._id == iten.id).ToList();
-                            //if (findData == null || findData.Count == 0)
-                            //{
-                            //    collection.InsertOne(document);
-                            //}
-                            //else
-                            //{
-                            //    collection.UpdateOne(
-                            //       d => d._id == iten.id,
-                            //       Builders<ChatBO>.Update.Set(d => d.LastMessage, document.LastMessage));
-
-                            //}
+                            }
                             //UpdateOne:  update only a few properties/fields
                         }
                         else
                         { // nếu CTV|BOT đã trả lời
-                            
+
                             collection.UpdateOne(
-                               d => d._id == iten.id,
-                               Builders<ChatBO>.Update.Set(d => d.IsReply, 1));
+                                   d => d._id == iten.id,
+                                   Builders<ChatBO>.Update
+                                        .Set(d => d.IsReply, 1)
+                                        .Set(d => d.LastMessage, iten.messages.data[0].message)
+                                        .Set(d => d.UpdatedDate, DateTime.Now)
+                                        .Set(d => d.MessageUpdatedDate, iten.messages.data[0].created_time)
+                                   );
                         }
                     }
                 }
