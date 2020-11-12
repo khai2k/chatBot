@@ -15,6 +15,7 @@ namespace ChatBotWorker.Model
         public string CustomerName { get; set; }
         public string LastMessage { get; set; }
         public int IsChiem { get; set; }
+        public int IsReply { get; set; }
     }
 }
 

@@ -137,7 +137,8 @@ namespace ChatBotWorker
                                 FbID = iten.id,
                                 CustomerName = iten.senders.data[0].name,
                                 LastMessage = iten.messages.data[0].message,
-                                IsChiem = 0
+                                IsChiem = 0,
+                                IsReply = 0
                             };
 
 
