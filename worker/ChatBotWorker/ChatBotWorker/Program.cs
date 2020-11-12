@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Configuration;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using MongoDB.Driver.Linq;
+using ChatBotWorker.Model;
 
 namespace ChatBotWorker
 {
@@ -40,7 +42,7 @@ namespace ChatBotWorker
 
         static MongoClient client = new MongoClient(MongoUrl);
         static IMongoDatabase database = client.GetDatabase(DBName);
-        static IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>(CollectionName);
+        static IMongoCollection<ChatBO> collection = database.GetCollection<ChatBO>(CollectionName);
         static void Main(string[] args)
         {
             if(database == null)
@@ -49,7 +51,7 @@ namespace ChatBotWorker
             }
             if(collection == null)
             {
-                collection = database.GetCollection<BsonDocument>(CollectionName);
+                collection = database.GetCollection<ChatBO>(CollectionName);
             }
 
             GetDataFb(112588937315601);
@@ -89,6 +91,7 @@ namespace ChatBotWorker
             return true;
         }
 
+        [Obsolete]
         public static bool GetDataFb(long page)
         {
             WebClient wc = new WebClient();
@@ -128,17 +131,36 @@ namespace ChatBotWorker
                             //    Console.WriteLine("NOTIFY: insert chat new customer\n");
                             //}
 
-                            BsonDocument document = new BsonDocument()
-                                .Add("_id", iten.id) // System.Guid.NewGuid().ToString()
-                                .Add("FbID", iten.id)
-                                .Add("CustomerName", iten.senders.data[0].name)
-                                .Add("LastMessage", iten.messages.data[0].message)
-                                .Add("IsChiem", 0);
-                            
-                            collection.InsertOne(document);
+                            ChatBO document = new ChatBO()
+                            {
+                                _id = iten.id,
+                                FbID = iten.id,
+                                CustomerName = iten.senders.data[0].name,
+                                LastMessage = iten.messages.data[0].message,
+                                IsChiem = 0
+                            };
 
-                            //https://laptrinhvb.net/bai-viet/devexpress/---Csharp----Huong-dan-them-xoa-sua-trong-database-MongoDB-/b8ac97af5e995b8b.html
 
+                            var result = collection.ReplaceOne(x => x._id == document._id, document,
+                                new UpdateOptions
+                                {
+                                    IsUpsert = true
+                                });
+
+
+                            //var findData = collection.Find(x => x._id == iten.id).ToList();
+                            //if (findData == null || findData.Count == 0)
+                            //{
+                            //    collection.InsertOne(document);
+                            //}
+                            //else
+                            //{
+                            //    collection.UpdateOne(
+                            //       d => d._id == iten.id,
+                            //       Builders<ChatBO>.Update.Set(d => d.LastMessage, document.LastMessage));
+
+                            //}
+                            //UpdateOne:  update only a few properties/fields
                         }
 
 

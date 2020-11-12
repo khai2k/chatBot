@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="GrapAPIModel2.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="Model\ChatBO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
