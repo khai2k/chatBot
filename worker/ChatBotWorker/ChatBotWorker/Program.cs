@@ -170,16 +170,13 @@ namespace ChatBotWorker
                                d => d._id == iten.id,
                                Builders<ChatBO>.Update.Set(d => d.IsReply, 1));
                         }
-
-
-
                     }
                 }
 
             }
             catch (Exception e)
             {
-                Console.WriteLine("Loi xay ra:" + e);
+                Helper.NotifyLine_Chat("Exception", e.Message);
             }
             return true;
         }
