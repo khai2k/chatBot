@@ -28,3 +28,4 @@ E:\MWG\BANGOC\chatbotadmin\worker\ChatBotWorker\ChatBotWorker\bin\Debug\MongoDB.
 E:\MWG\BANGOC\chatbotadmin\worker\ChatBotWorker\ChatBotWorker\bin\Debug\MongoDB.Driver.xml
 E:\MWG\BANGOC\chatbotadmin\worker\ChatBotWorker\ChatBotWorker\bin\Debug\MongoDB.Driver.Core.xml
 E:\MWG\BANGOC\chatbotadmin\worker\ChatBotWorker\ChatBotWorker\bin\Debug\System.Buffers.xml
+E:\MWG\BANGOC\chatbotadmin\worker\ChatBotWorker\ChatBotWorker\obj\Debug\ChatBotWorker.csprojAssemblyReference.cache

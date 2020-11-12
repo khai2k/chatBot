@@ -38,7 +38,7 @@ namespace ChatBotWorker
         public static string FBToken = ConfigurationManager.AppSettings["CHATBOT_FB_TOKEN"];
         public static string MongoUrl = ConfigurationManager.AppSettings["CHATBOT_MONGO_URL"];
         public static string DBName = ConfigurationManager.AppSettings["CHATBOT_MONGO_DBNAME"];
-        static string CollectionName = "chatThread";
+        static string CollectionName = "ChatThread";
 
         static MongoClient client = new MongoClient(MongoUrl);
         static IMongoDatabase database = client.GetDatabase(DBName);
@@ -162,6 +162,13 @@ namespace ChatBotWorker
 
                             //}
                             //UpdateOne:  update only a few properties/fields
+                        }
+                        else
+                        { // nếu CTV|BOT đã trả lời
+                            
+                            collection.UpdateOne(
+                               d => d._id == iten.id,
+                               Builders<ChatBO>.Update.Set(d => d.IsReply, 1));
                         }
 
 
