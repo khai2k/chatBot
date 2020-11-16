@@ -16,80 +16,78 @@
 
 */
 import React, { Component } from "react";
+import axios from "axios"
 import { Grid, Row, Col, Table } from "react-bootstrap";
+import * as API from "../api/index"
+import { useCountdownTimer } from 'use-countdown-timer';
+
 
 import Card from "components/Card/Card.jsx";
-import { thArray, tdArray } from "variables/Variables.jsx";
+import { thArray, tdArray, thArray2, tdArray2 } from "variables/Variables.jsx";
+import ConversationListItem from "components/ConversationListItem";
+import MessageList from "components/MessageList";
 
 class TableList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      array_conversations: [],
+      messages: []
+    }
+
+  }
+  componentDidMount() {
+
+    const fetchConversations = async () => {
+      const data = await API.getAllConversations();
+      this.setState({ array_conversations: data });
+    }
+    fetchConversations();
+  }
+
+  fetchMessage = async (conversationId) => {
+    const { data } = await API.getMessagesConversation(conversationId);
+    data.reverse();
+    this.setState({ messages: data })
+  }
+
+
   render() {
     return (
       <div className="content">
+
         <Grid fluid>
           <Row>
-            <Col md={12}>
-              <Card
-                title="Striped Table with Hover"
-                category="Here is a subtitle for this table"
-                ctTableFullWidth
-                ctTableResponsive
-                content={
-                  <Table striped hover>
-                    <thead>
-                      <tr>
-                        {thArray.map((prop, key) => {
-                          return <th key={key}>{prop}</th>;
-                        })}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {tdArray.map((prop, key) => {
-                        return (
-                          <tr key={key}>
-                            {prop.map((prop, key) => {
-                              return <td key={key}>{prop}</td>;
-                            })}
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </Table>
-                }
-              />
-            </Col>
+            <Col md={3} className="scrollable" >
+              {
+                this.state.array_conversations.map(conversation =>
+                  <ConversationListItem
+                    key={conversation.FbID}
+                    data={conversation}
+                    OnFetch={this.fetchMessage}
+                  />
+                )
+              }
 
-            <Col md={12}>
-              <Card
-                plain
-                title="Striped Table with Hover"
-                category="Here is a subtitle for this table"
-                ctTableFullWidth
-                ctTableResponsive
-                content={
-                  <Table hover>
-                    <thead>
-                      <tr>
-                        {thArray.map((prop, key) => {
-                          return <th key={key}>{prop}</th>;
-                        })}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {tdArray.map((prop, key) => {
-                        return (
-                          <tr key={key}>
-                            {prop.map((prop, key) => {
-                              return <td key={key}>{prop}</td>;
-                            })}
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </Table>
-                }
-              />
+            </Col>
+            <Col md={6} >
+              <MessageList data={this.state.messages} />
+
+            </Col>
+            <Col md={3}  >
+              {
+                this.state.array_conversations.map(conversation =>
+                  <ConversationListItem
+                    key={conversation.FbID}
+                    data={conversation}
+                    OnFetch={this.fetchMessage}
+                  />
+                )
+              }
+
             </Col>
           </Row>
+
         </Grid>
       </div>
     );

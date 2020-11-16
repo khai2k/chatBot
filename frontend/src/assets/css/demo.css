@@ -15,6 +15,14 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+.cursor_pointer{
+  cursor: pointer;
+}
+.scrollable {
+  overflow-y:scroll; 
+  position:relative;
+  height: 80vh;
+}
 .fixed-plugin .button-container .github-btn{
     display: inline-block;
     font-size: 14px;

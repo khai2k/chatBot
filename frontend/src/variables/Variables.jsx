@@ -266,14 +266,23 @@ var style = {
 // // // For tables
 // //
 //
-const thArray = ["ID", "Name", "Salary", "Country", "City"];
+const thArray = ["NAME", "LAST MESSAGE"];
 const tdArray = [
-  ["1", "Dakota Rice", "$36,738", "Niger", "Oud-Turnhout"],
-  ["2", "Minerva Hooper", "$23,789", "Curaçao", "Sinaai-Waas"],
-  ["3", "Sage Rodriguez", "$56,142", "Netherlands", "Baileux"],
-  ["4", "Philip Chaney", "$38,735", "Korea, South", "Overland Park"],
-  ["5", "Doris Greene", "$63,542", "Malawi", "Feldkirchen in Kärnten"],
-  ["6", "Mason Porter", "$78,615", "Chile", "Gloucester"]
+  ["Dakota Rice", "Oud-Turnhout"],
+  ["Minerva Hooper", "Sinaai-Waas"],
+  ["Sage Rodriguez", "Baileux"],
+  ["Philip Chaney", "Overland Park"],
+  ["Doris Greene", "Feldkirchen in Kärnten"],
+  ["Mason Porter", "Gloucester"]
+];
+const thArray2 = ["CUSTOMER MESSAGES", "MY MESSAGES"];
+const tdArray2 = [
+  ["Dakota Rice", ""],
+  ["", "Sinaai-Waas"],
+  ["Sage Rodriguez", ""],
+  ["", "Overland Park"],
+  ["Doris Greene", ""],
+  ["", "Gloucester"]
 ];
 
 //
@@ -540,7 +549,7 @@ var responsiveSales = [
     "screen and (max-width: 640px)",
     {
       axisX: {
-        labelInterpolationFnc: function(value) {
+        labelInterpolationFnc: function (value) {
           return value[0];
         }
       }
@@ -586,7 +595,7 @@ var responsiveBar = [
     {
       seriesBarDistance: 5,
       axisX: {
-        labelInterpolationFnc: function(value) {
+        labelInterpolationFnc: function (value) {
           return value[0];
         }
       }
@@ -601,7 +610,9 @@ var legendBar = {
 module.exports = {
   style, // For notifications (App container and Notifications view)
   thArray,
-  tdArray, // For tables (TableList view)
+  tdArray,
+  thArray2,
+  tdArray2, // For tables (TableList view)
   iconsArray, // For icons (Icons view)
   dataPie,
   legendPie,
