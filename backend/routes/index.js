@@ -6,7 +6,19 @@ var FB_CONFIG = require('../configSys')
 var linkGetALLConversations = `https://graph.facebook.com/${FB_CONFIG.PAGE_ID}/conversations?access_token=${FB_CONFIG.ACCESS_TOKEN}`
 router.get('/conversations', async (req, res, next) => {
   try {
-    const { data } = await axios.get(linkGetALLConversations)
+    // const { data } = await axios.get(linkGetALLConversations)
+    const data = [
+      {
+        conversationId: "t_2895126170744398",
+        customerName: "khai",
+        lastMessage: "hello"
+      },
+      {
+        conversationId: "t_1476480595885765",
+        customerName: "cuong",
+        lastMessage: "hi"
+      }
+    ]
     return res.send(data);
   } catch (error) {
     return res.send(error).status(400)
