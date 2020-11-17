@@ -16,14 +16,10 @@
 
 */
 import React, { Component } from "react";
-import axios from "axios"
-import { Grid, Row, Col, Table } from "react-bootstrap";
+import { Grid, Row, Col } from "react-bootstrap";
 import * as API from "../api/index"
-import { useCountdownTimer } from 'use-countdown-timer';
 
 
-import Card from "components/Card/Card.jsx";
-import { thArray, tdArray, thArray2, tdArray2 } from "variables/Variables.jsx";
 import ConversationListItem from "components/ConversationListItem";
 import MessageList from "components/MessageList";
 
@@ -51,11 +47,9 @@ class TableList extends Component {
     this.setState({ messages: data })
   }
 
-
   render() {
     return (
       <div className="content">
-
         <Grid fluid>
           <Row>
             <Col md={3} className="scrollable" >
