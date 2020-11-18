@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import shave from 'shave';
-import avatar from "assets/img/faces/face-0.jpg";
+import avatar from "assets/img/default-avatar.png";
 import './ConversationListItem.css';
 
 

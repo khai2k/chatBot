@@ -1,25 +1,7 @@
-/*!
-
-=========================================================
-* Light Bootstrap Dashboard React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React, { Component } from "react";
 import { Grid, Row, Col } from "react-bootstrap";
 import * as API from "../api/index"
-
-
+import 'views/TableList.css'
 import ConversationListItem from "components/ConversationListItem";
 import MessageList from "components/MessageList";
 
@@ -33,7 +15,6 @@ class TableList extends Component {
 
   }
   componentDidMount() {
-
     const fetchConversations = async () => {
       const data = await API.getAllConversations();
       this.setState({ array_conversations: data });
@@ -49,7 +30,7 @@ class TableList extends Component {
 
   render() {
     return (
-      <div className="content">
+      <div>
         <Grid fluid>
           <Row>
             <Col md={3} className="scrollable" >
