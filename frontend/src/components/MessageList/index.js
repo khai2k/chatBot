@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Message from '../Message';
 import moment from 'moment';
-
 import './MessageList.css';
+import { CONFIG } from 'configSys'
 
-const MY_USER_ID = '112588937315601';
+const MY_PAGE_ID = CONFIG.MY_PAGE_ID;
 
 export default function MessageList(props) {
   const [messages, setMessages] = useState([])
@@ -35,7 +35,7 @@ export default function MessageList(props) {
       let previous = messages[i - 1];
       let current = messages[i];
       let next = messages[i + 1];
-      let isMine = current.from.id === MY_USER_ID;
+      let isMine = current.from.id === MY_PAGE_ID;
       let currentMoment = moment(current.created_time);
       let prevBySameAuthor = false;
       let nextBySameAuthor = false;
