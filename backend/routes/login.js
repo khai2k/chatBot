@@ -7,14 +7,16 @@ var getToken = require("../untils/getToken")
 router.post('/', async (req, res, next) => {
     try {
         const { user, password } = req.body;
-        console.log(user, "jdjdjjdjjdj")
-        let isSignIn = await loginDao.signIn({ user, password });
-        if (isSignIn) {
-            res.send({
-                user: user,
-                token: getToken({ user, password })
-            })
-        }
+        // let isSignIn = await loginDao.signIn({ user, password });
+        // if (isSignIn) {
+        //     res.send({
+        //         user: user,
+        //         token: getToken({ user, password })
+        //     })
+        // }
+        console.log(user, "ss", password)
+        if (user == "admin" && password == "admin")
+            res.send({ user: user }).status(200)
         else res.send({ message: 'User Not Found' }).status(404);
         return;
     }
